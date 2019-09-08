@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="530944b6-ae19-49ec-bc0c-f57caebece05" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/lib/f1tv/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lib/f1tv/api.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/lib/plugin.py" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lib/plugin.py" afterDir="false" />

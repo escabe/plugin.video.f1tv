@@ -23,7 +23,7 @@ def run():
                 if (episode['status'] == 'replay') or (episode['status'] == 'live'):
                     url = build_url({'mode': 'play',
                                      'episode': episode['channel_urls'][0]})
-                    li = xbmcgui.ListItem(episode['session_name'], iconImage='DefaultVideo.png')
+                    li = xbmcgui.ListItem(episode['session_name'], iconImage=episode['image_urls'][0]['url'])
                     li.setProperty('IsPlayable', 'true')
                     li.setInfo('video', {'title': episode['session_name'],
                                                 'genre': "Motorsport",

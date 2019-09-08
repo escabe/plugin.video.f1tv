@@ -50,7 +50,7 @@ class api:
     def getUpcoming(self):
         headers = {'Content-Type': 'application/json',
                    'Authentication': 'JWT '+self.auth['jwttoken']}
-        r = self.session.get('https://f1tv.formula1.com/api/event-occurrence/current-season-upcoming/?fields_to_expand=sessionoccurrence_urls&fields=sessionoccurrence_urls,sessionoccurrence_urls__status,sessionoccurrence_urls__session_name,sessionoccurrence_urls__channel_urls',
+        r = self.session.get('https://f1tv.formula1.com/api/event-occurrence/current-season-upcoming/?fields_to_expand=sessionoccurrence_urls,sessionoccurrence_urls__image_urls&fields=sessionoccurrence_urls,sessionoccurrence_urls__status,sessionoccurrence_urls__session_name,sessionoccurrence_urls__channel_urls,sessionoccurrence_urls__image_urls,sessionoccurrence_urls__image_urls__url',
                              headers=headers)
         if (r.ok):
             return r.json()['objects']
