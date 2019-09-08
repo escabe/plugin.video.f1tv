@@ -16,7 +16,6 @@ class api:
         fp = open(__profile__ + 'auth.json','w')
         json.dump(self.auth, fp)
         fp.close()
-        return
 
     def getJWTToken(self):
         headers = {'Content-Type': 'application/json'}
@@ -31,7 +30,6 @@ class api:
             self.auth['jwtexp'] = info['exp']
         else:
             raise ValueError('social-authenticate failed.')
-        return
 
     def login(self):
         headers = {'Content-Type': 'application/json',
@@ -48,12 +46,30 @@ class api:
             self.saveAuth()
         else:
             raise ValueError('CreateSession failed.')
-        return
+
+    def getUpcoming(self):
+        headers = {'Content-Type': 'application/json',
+                   'Authentication': 'JWT '+self.auth['jwttoken']}
+        r = self.session.get('https://f1tv.formula1.com/api/event-occurrence/current-season-upcoming/?fields_to_expand=sessionoccurrence_urls&fields=sessionoccurrence_urls,sessionoccurrence_urls__status,sessionoccurrence_urls__session_name,sessionoccurrence_urls__channel_urls',
+                             headers=headers)
+        if (r.ok):
+            return r.json()['objects']
+        else:
+            raise ValueError('Unable to retrieve upcoming list.')
+
+    def getStream(self, episode):
+        headers = {'Content-Type': 'application/json',
+                   'Authentication': 'JWT '+self.auth['jwttoken']}
+        body = {'channel_url': episode}
+        r = self.session.post('https://f1tv.formula1.com/api/viewings/', headers=headers, data=json.dumps(body))
+        if r.ok:
+            return r.json()['tokenised_url']
+        else:
+            raise ValueError('viewings failed.')
 
     def __init__(self):
         self.session = requests.session()
         # Try loading credentials from disk
-        import web_pdb; web_pdb.set_trace()
         if os.path.exists(__profile__+'auth.json'):
             fp = open(__profile__+'auth.json')
             self.auth = json.load(fp)
@@ -65,4 +81,3 @@ class api:
             # No auth saved, login
             self.auth = {}
             self.login()
-        return
