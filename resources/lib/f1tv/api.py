@@ -59,7 +59,7 @@ class api:
 
     def getStream(self, episode):
         headers = {'Content-Type': 'application/json',
-                   'Authentication': 'JWT '+self.auth['jwttoken']}
+                   'Authorization': 'JWT '+self.auth['jwttoken']}
         body = {'channel_url': episode}
         r = self.session.post('https://f1tv.formula1.com/api/viewings/', headers=headers, data=json.dumps(body))
         if r.ok:
