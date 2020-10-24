@@ -33,12 +33,11 @@ class api:
 
     def login(self):
         headers = {'Content-Type': 'application/json',
-                   'apiKey': 'AH5B283RFx1K2AfT6z99ndGE7L2VZL62',
-                   'CD-Language': 'en-GB',
-                   'cd-systemid': '60a9ad84-e93d-480f-80d6-af37494f2e22'}
+                   'apikey': 'fCUCjWrKPu9ylJwRAv8BpGLEgiAuThx7'}
         body = {'Login': __addon__.getSetting('username'),
-                'Password': __addon__.getSetting('password')}
-        r = self.session.post('https://api.formula1.com/v1/account/Subscriber/CreateSession',
+                'Password': __addon__.getSetting('password'),
+                'DistributionChannel': 'd861e38f-05ea-4063-8776-a7e2b6d885a4'}
+        r = self.session.post('https://api.formula1.com/v2/account/subscriber/authenticate/by-password',
                               headers=headers, data=json.dumps(body))
         if r.ok and 'Fault' not in r.json():
             self.auth['subscriptionToken'] = r.json()["data"]["subscriptionToken"]
